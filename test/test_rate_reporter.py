@@ -22,7 +22,7 @@ class TestRateReporter(unittest.TestCase):
         
         self.assertEqual(
             expected_report,
-            app.calculate_yearly_rates('2010', '2012', 'January')
+            app.calculate_yearly_rates(2010, 2012, 'January')
         )
 
     def test_should_keep_track_of_monthly_increment(self):
@@ -37,31 +37,23 @@ class TestRateReporter(unittest.TestCase):
 
         self.assertEqual('MXN', app.currency)
 
-    def test_should_return_error_message_for_empty_initial_year(self):
-        app = RateReporter()
-        self.assertEqual('Cannot process empty year', app.calculate_yearly_rates('', '2023', 'June'))
-
-    def test_should_return_error_message_for_empty_final_year(self):
-        app = RateReporter()
-        self.assertEqual('Cannot process empty year', app.calculate_yearly_rates('2023', '', 'June'))
-
     def test_should_return_error_message_if_initial_year_is_after_final_year(self):
         app = RateReporter()
-        self.assertEqual('Initial year cannot be greater than final year', app.calculate_yearly_rates('2023', '2020', 'June'))
+        self.assertEqual('Initial year cannot be greater than final year', app.calculate_yearly_rates(2023, 2020, 'June'))
 
     def test_should_return_error_message_if_initial_year_is_not_an_integer(self):
         app = RateReporter()
-        self.assertEqual('Years must be integers', app.calculate_yearly_rates('Not an integer', '2023', 'June'))
+        self.assertEqual('Years must be integers', app.calculate_yearly_rates('Not an integer', 2023, 'June'))
 
     def test_should_return_error_message_if_final_year_is_not_an_integer(self):
         app = RateReporter()
-        self.assertEqual('Years must be integers', app.calculate_yearly_rates('2023', 'Not an integer', 'June'))
+        self.assertEqual('Years must be integers', app.calculate_yearly_rates(2023, 'Not an integer', 'June'))
 
     def test_should_return_error_message_for_empty_month(self):
         app = RateReporter()
-        self.assertEqual('Invalid month: ', app.calculate_yearly_rates('2020', '2023', ''))
+        self.assertEqual('Invalid month: ', app.calculate_yearly_rates(2020, 2023, ''))
 
     def test_should_return_error_message_for_invalid_month(self):
         app = RateReporter()
-        self.assertEqual('Invalid month: Some month', app.calculate_yearly_rates('2020', '2023', 'Some month'))
+        self.assertEqual('Invalid month: Some month', app.calculate_yearly_rates(2020, 2023, 'Some month'))
     

@@ -1,4 +1,4 @@
-from utils import StringUtils
+from utils import Numbers
 from table import Table
 from .currency import Currency
 from .calendar import Calendar
@@ -52,7 +52,7 @@ class RateReporter:
     def _do_calculate_yearly_rates(self, initial_year, final_year, month):
         self._validate_input(initial_year, final_year, month)
         table = Table(('Year', 'Month', 'Rate', 'Currency'))
-        for year in range(int(initial_year), int(final_year) + 1):
+        for year in range(initial_year, final_year + 1):
             self._add_row(table, year, initial_year, month)
         return str(table)
 
@@ -60,26 +60,20 @@ class RateReporter:
         table.add_row(
             year,
             month,
-            self._format_rate(self._rate_for_year(year, int(initial_year))),
+            self._format_rate(self._rate_for_year(year, initial_year)),
             self.currency
         )
 
     def _validate_input(self, initial_year, final_year, month):
-        if (not StringUtils.all_truthy((initial_year, final_year))):
-            raise ValueError('Cannot process empty year')
-
-        if (not StringUtils.all_contain_integers((initial_year, final_year))):
+        if (not Numbers.all_integers(initial_year, final_year)):
             raise ValueError('Years must be integers')
 
-        if (int(initial_year) > int(final_year)):
+        if (initial_year > final_year):
             raise ValueError('Initial year cannot be greater than final year')
 
         if (not self._is_valid_month(month)):
             raise ValueError(f'Invalid month: {month}')
             
-    def _string_contains_integer(self, string):
-        return StringUtils.string_contains_integer(string)
-    
     def _rate_for_year(self, year, initial_year):
         rate = self.initial_rate
         for year in range(initial_year, year):
