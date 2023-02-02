@@ -81,6 +81,6 @@ class TestLengthConversionsReporter(unittest.TestCase):
     def test_should_return_error_message_if_initial_meter_is_greater_than_final_meter(self):
         app = LengthConversionsReporter()
         self.assertEqual(
-            'Final meter must be greater than initial meter',
+            'Final measurement must be greater than initial measurement',
             app.meters_to_english_units('102', '100') 
         )

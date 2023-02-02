@@ -39,7 +39,7 @@ class LengthConversionsReporter:
             raise ValueError('Amount of meters must be positive')
 
         if (int(initial_meters) > int(final_meters)):
-            raise ValueError('Final meter must be greater than initial meter')
+            raise ValueError('Final measurement must be greater than initial measurement')
 
     def _string_contains_integer(self, string):
         return StringUtils.string_contains_integer(string)
