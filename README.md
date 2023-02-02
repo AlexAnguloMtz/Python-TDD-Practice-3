@@ -41,3 +41,13 @@ Write a program to print the monthly
 rate for January 2011, 2012, 2013, etc...up to 2035
 
 ## Exercise Three:
+Write a program that can read from the command line 
+an initial and final measurement in meters, and convert those
+meters to yards, feet and inches.
+
+You must print a table with all the equivalences, 
+starting at the initial measurement, adding one meter
+for each row, and stopping at the final measurement.
+
+In each row you should print the equivalences between 
+meters and all the units mentioned before.
