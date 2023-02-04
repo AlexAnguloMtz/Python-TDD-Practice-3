@@ -35,6 +35,8 @@ class TestRateReporter(unittest.TestCase):
         app = RateReporter()
         app.currency = 'MXN'
 
+        self.assertEqual('MXN', app.currency)
+
     def test_return_error_message_for_invalid_currency(self):
         with self.assertRaises(Exception) as context:
             app = RateReporter()
