@@ -6,18 +6,18 @@ Test Driven Development, Object Oriented Programming and Fuctional Programming
 
 1) Open the root folder of the project in your terminal
 2) Run the following command: 
-'''
+```
 python3 -m unittest
-'''
+```
 
 After running the command, you will see the results for the tests in your terminal
 
 # How to run the exercises:
 1) Open the root folder of the project in your terminal
 2) Run the standard Python command to run any of the exercises in the root folder. For example: 
-'''
+```
 python3 exercise_one.py
-'''
+```
 
 ## Exercise One:
 Write a program to read an initial and a final temperature
@@ -38,7 +38,7 @@ Imagine that we are in January 2010
 and the initial rate starts at 57.00 USD.
 
 Write a program to print the monthly
-rate for January 2011, 2012, 2013, etc...up to 2035
+rate for January 2011, 2012, 2013, etc., up to 2035
 
 ## Exercise Three:
 Write a program that can read from the command line 
