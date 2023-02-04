@@ -1,7 +1,7 @@
-from utils import Numbers
 from table import Table
-from .currency import Currency
+from .currency import Currency, InvalidCurrencyException
 from .calendar import Calendar
+from .input_validator import InputValidator
 
 class RateReporter:
 
@@ -9,6 +9,7 @@ class RateReporter:
         self._monthly_increment_percentage = 0
         self._initial_rate = 0
         self._currency = 'USD'
+        self._input_validator = InputValidator()
 
     def calculate_yearly_rates(self, initial_year, final_year, month):
         try:
@@ -34,7 +35,7 @@ class RateReporter:
     @currency.setter
     def currency(self, currency):
         if (not self._is_valid_currency(currency)):
-            raise ValueError(f'Invalid currency: {currency}')
+            raise InvalidCurrencyException(f'Invalid currency: {currency}')
 
         self._currency = currency
 
@@ -65,14 +66,7 @@ class RateReporter:
         )
 
     def _validate_input(self, initial_year, final_year, month):
-        if (not Numbers.all_integers(initial_year, final_year)):
-            raise ValueError('Years must be integers')
-
-        if (initial_year > final_year):
-            raise ValueError('Initial year cannot be greater than final year')
-
-        if (not self._is_valid_month(month)):
-            raise ValueError(f'Invalid month: {month}')
+        self._input_validator.validate_input(initial_year, final_year, month)
             
     def _rate_for_year(self, year, initial_year):
         rate = self.initial_rate
@@ -89,6 +83,3 @@ class RateReporter:
 
     def _is_valid_currency(self, currency):
         return Currency.is_valid_currency(currency)
-
-    def _is_valid_month(self, month):
-        return Calendar.is_valid_month(month)

@@ -171,3 +171,9 @@ class Currency:
     @staticmethod
     def is_valid_currency(a_currency):
         return any(map(lambda currency: currency[0] == a_currency, Currency._CURRENCIES))
+
+class InvalidCurrencyException(Exception):
+    
+    def __init__(self, message):
+        super().__init__(message)
+        

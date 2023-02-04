@@ -22,6 +22,9 @@ def rates_table():
     return configured_rates_reporter().calculate_yearly_rates(2010, 2035, 'January')
 
 def main():
-    print(rates_table())
+    try:
+        print(rates_table())
+    except Exception as exception:
+        print(exception)
 
 main()

@@ -1,8 +1,11 @@
 from table import Table
-from utils import StringUtils, Numbers
 from .length_conversor import LengthConversor
+from .input_validator import InputValidator
 
 class LengthConversionsReporter:
+
+    def __init__(self):
+        self._input_validator = InputValidator()
     
     def meters_to_english_units(self, initial_meters, final_meters):
         try:
@@ -28,18 +31,8 @@ class LengthConversionsReporter:
     def _format_result(self, result):
         return f'{result:.2f}'
 
-    def _validate_input(self, initial_meters, final_meters):
-        if (not StringUtils.all_truthy((initial_meters, final_meters))):
-            raise ValueError('Cannot process empty amount of meters')
-
-        if (not StringUtils.all_contain_integers((initial_meters, final_meters))):
-            raise ValueError('Amount of meters must contain an integer value')
-
-        if (not Numbers.all_positive((int(initial_meters), int(final_meters)))):
-            raise ValueError('Amount of meters must be positive')
-
-        if (int(initial_meters) > int(final_meters)):
-            raise ValueError('Final measurement must be greater than initial measurement')
-
     def _string_contains_integer(self, string):
         return StringUtils.string_contains_integer(string)
+
+    def _validate_input(self, initial_meters, final_meters):
+        self._input_validator.validate_input(initial_meters, final_meters)
